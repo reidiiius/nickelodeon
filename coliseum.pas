@@ -1,15 +1,18 @@
-{$mode objfpc}
+{$mode objfpc}{$R+}
 unit Coliseum;
 
 interface
 
-uses BaseUnix;
+uses
+  BaseUnix, SysUtils;
 
+type
+  TSumarian = String[60];
 
 var
   Tb : Char;
   Epoch : TTime;
-  Diadem, Head, Tail : String[60];
+  Diadem, Head, Tail : TSumarian;
 
   DataBank : Record
     j136y7, j167y2, j17, j17y2, j2, j23, j236,
@@ -23,7 +26,7 @@ var
     k2j17, k2j5, k2j56, k2j56y7, k2j5x1, k2j5y6, k2j6,
     k2x1, k34, k345x2, k34x2, k5, k56, k56x4,
     k6, k6x5, n0, n167, n167x4, n25x6, n26y5,
-    n345, n345y7, n45y2, n5y2, n67x2, n6x2 : String[60];
+    n345, n345y7, n45y2, n5y2, n67x2, n6x2 : TSumarian;
   end;
 
 
@@ -297,22 +300,33 @@ end;
 
 
 procedure Menu;
+var
+  itr : Byte = 0;
+  fmt : String[24] = '';
+
 begin
   Tb := Chr(9);
+
+  while itr < 7 do
+  begin
+    fmt += Concat(Tb, '%s');
+    Inc(itr);
+  end;
+
   WriteLn;
-  Writeln(Tb,'j136y7',Tb,'j167y2',Tb,'j17',Tb,'j17y2',Tb,'j2',Tb,'j23',Tb,'j236');
-  WriteLn(Tb,'j23k6',Tb,'j246y3',Tb,'j26',Tb,'j26y3',Tb,'j26y34',Tb,'j2k56',Tb,'j2k56x4');
-  WriteLn(Tb,'j2k6',Tb,'j2k6x5',Tb,'j2k6y3',Tb,'j2y3',Tb,'j3',Tb,'j34k6',Tb,'j36');
-  WriteLn(Tb,'j3k56x4',Tb,'j3k5x4',Tb,'j3k6',Tb,'j6',Tb,'k157x6',Tb,'k1j6',Tb,'k256');
-  WriteLn(Tb,'k26',Tb,'k26x5',Tb,'k2j17',Tb,'k2j6',Tb,'k56',Tb,'k56x4',Tb,'k6');
-  WriteLn(Tb,'k6x5',Tb,'n0',Tb,'n167x4',Tb,'n26y5',Tb,'n345',Tb,'n45y2',Tb,'n5y2');
+  Writeln(Format(fmt, ['j136y7','j167y2','j17','j17y2','j2','j23','j236']));
+  WriteLn(Format(fmt, ['j23k6','j246y3','j26','j26y3','j26y34','j2k56','j2k56x4']));
+  WriteLn(Format(fmt, ['j2k6','j2k6x5','j2k6y3','j2y3','j3','j34k6','j36']));
+  WriteLn(Format(fmt, ['j3k56x4','j3k5x4','j3k6','j6','k157x6','k1j6','k256']));
+  WriteLn(Format(fmt, ['k26','k26x5','k2j17','k2j6','k56','k56x4','k6']));
+  WriteLn(Format(fmt, ['k6x5','n0','n167x4','n26y5','n345','n45y2','n5y2']));
   WriteLn;
-  WriteLn(Tb,'k135x4',Tb,'k345x2',Tb,'k34',Tb,'k34x2',Tb,'k2',Tb,'k12',Tb,'k125');
-  WriteLn(Tb,'k12j5',Tb,'k257x1',Tb,'k25',Tb,'k25x1',Tb,'k25x17',Tb,'k2j56',Tb,'k2j56y7');
-  WriteLn(Tb,'k2j5',Tb,'k2j5y6',Tb,'k2j5x1',Tb,'k2x1',Tb,'k1',Tb,'k17j5',Tb,'k15');
-  WriteLn(Tb,'k1j56y7',Tb,'k1j6y7',Tb,'k1j5',Tb,'k5',Tb,'j346y5',Tb,'j3k5',Tb,'j256');
-  WriteLn(Tb,'j25',Tb,'j25y6',Tb,'j2k34',Tb,'j2k5',Tb,'j56',Tb,'j56y7',Tb,'j5');
-  WriteLn(Tb,'j5y6',Tb,'n0',Tb,'n345y7',Tb,'n25x6',Tb,'n167',Tb,'n67x2',Tb,'n6x2');
+  WriteLn(Format(fmt, ['k135x4','k345x2','k34','k34x2','k2','k12','k125']));
+  WriteLn(Format(fmt, ['k12j5','k257x1','k25','k25x1','k25x17','k2j56','k2j56y7']));
+  WriteLn(Format(fmt, ['k2j5','k2j5y6','k2j5x1','k2x1','k1','k17j5','k15']));
+  WriteLn(Format(fmt, ['k1j56y7','k1j6y7','k1j5','k5','j346y5','j3k5','j256']));
+  WriteLn(Format(fmt, ['j25','j25y6','j2k34','j2k5','j56','j56y7','j5']));
+  WriteLn(Format(fmt, ['j5y6','n0','n345y7','n25x6','n167','n67x2','n6x2']));
 end;
 
 

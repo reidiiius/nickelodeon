@@ -1,11 +1,12 @@
-{$mode objfpc}
+{$mode objfpc}{$R+}
 program Prytania;
 
-uses Coliseum in 'coliseum.pas';
+uses
+  Coliseum in 'coliseum.pas';
 
 var
   Item : Byte;
-  Prop : String[10];
+  Prop : String[16];
 
 begin (* Main *)
 
