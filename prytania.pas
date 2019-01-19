@@ -5,25 +5,25 @@ uses
   Coliseum in 'coliseum.pas';
 
 var
-  Item : Byte;
-  Prop : String[16];
+  item : Byte;
+  prop : TDzongkha;
 
 begin (* Main *)
 
   if ParamCount < 1 then Menu;
 
-  for Item := 1 to ParamCount do
+  for item := 1 to ParamCount do
   begin
-    Prop := ParamStr(Item);
+    prop := ParamStr(item);
 
-    if length(Prop) < 2 then
+    if Length(prop) < 2 then
     begin
       Menu;
       WriteLn;
       Exit;
     end;
 
-    EADGBE(Prop, Retrieve(Prop));
+    EADGBE(prop, Retrieve(prop));
   end;
 
   WriteLn;

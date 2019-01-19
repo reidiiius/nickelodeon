@@ -7,6 +7,7 @@ uses
   BaseUnix, SysUtils;
 
 type
+  TDzongkha = String[20];
   TSumarian = String[60];
 
 var
@@ -30,32 +31,34 @@ var
   end;
 
 
-function Retrieve(const qp : String) : String;
+function Retrieve(const sign: TDzongkha) : TSumarian;
 
-function Bj(const qp : String) : String;
+function Bj(const qp: TSumarian) : TSumarian;
 
-function Fn(const qp : String) : String;
+function Fn(const qp: TSumarian) : TSumarian;
 
-function Cn(const qp : String) : String;
+function Cn(const qp: TSumarian) : TSumarian;
 
-function Gn(const qp : String) : String;
+function Gn(const qp: TSumarian) : TSumarian;
 
-function Dn(const qp : String) : String;
+function Dn(const qp: TSumarian) : TSumarian;
 
-function An(const qp : String) : String;
+function An(const qp: TSumarian) : TSumarian;
 
-function En(const qp : String) : String;
+function En(const qp: TSumarian) : TSumarian;
 
-function Bn(const qp : String) : String;
+function Bn(const qp: TSumarian) : TSumarian;
 
-function Fk(const qp : String) : String;
+function Fk(const qp: TSumarian) : TSumarian;
+
+function Sentinel(const qp: TSumarian) : Boolean;
 
 
-procedure CGDAE(const Prop, qp : String);
+procedure CGDAE(const sign: TDzongkha; const qp: TSumarian);
 
-procedure EADGBE(const Prop, qp : String);
+procedure EADGBE(const sign: TDzongkha; const qp: TSumarian);
 
-procedure Ennead(const Prop, qp : String);
+procedure Ennead(const sign: TDzongkha; const qp: TSumarian);
 
 procedure Menu;
 
@@ -63,102 +66,106 @@ procedure Menu;
 implementation
 
 
-function Retrieve(const qp : String) : String;
+function Retrieve(const sign: TDzongkha) : TSumarian;
+var
+  db : TSumarian = '';
+
 begin
   with DataBank do
   begin
-    Case LowerCase(qp) of
-      'j136y7'  : Exit(j136y7);
-      'j167y2'  : Exit(j167y2);
-      'j17'     : Exit(j17);
-      'j17y2'   : Exit(j17y2);
-      'j2'      : Exit(j2);
-      'j23'     : Exit(j23);
-      'j236'    : Exit(j236);
-      'j23k6'   : Exit(j23k6);
-      'j246y3'  : Exit(j246y3);
-      'j25'     : Exit(j25);
-      'j256'    : Exit(j256);
-      'j25y6'   : Exit(j25y6);
-      'j26'     : Exit(j26);
-      'j26y3'   : Exit(j26y3);
-      'j26y34'  : Exit(j26y34);
-      'j2k34'   : Exit(j2k34);
-      'j2k5'    : Exit(j2k5);
-      'j2k56'   : Exit(j2k56);
-      'j2k56x4' : Exit(j2k56x4);
-      'j2k6'    : Exit(j2k6);
-      'j2k6x5'  : Exit(j2k6x5);
-      'j2k6y3'  : Exit(j2k6y3);
-      'j2y3'    : Exit(j2y3);
-      'j3'      : Exit(j3);
-      'j346y5'  : Exit(j346y5);
-      'j34k6'   : Exit(j34k6);
-      'j36'     : Exit(j36);
-      'j3k5'    : Exit(j3k5);
-      'j3k56x4' : Exit(j3k56x4);
-      'j3k5x4'  : Exit(j3k5x4);
-      'j3k6'    : Exit(j3k6);
-      'j5'      : Exit(j5);
-      'j56'     : Exit(j56);
-      'j56y7'   : Exit(j56y7);
-      'j5y6'    : Exit(j5y6);
-      'j6'      : Exit(j6);
-      'k1'      : Exit(k1);
-      'k12'     : Exit(k12);
-      'k125'    : Exit(k125);
-      'k12j5'   : Exit(k12j5);
-      'k135x4'  : Exit(k135x4);
-      'k15'     : Exit(k15);
-      'k157x6'  : Exit(k157x6);
-      'k17j5'   : Exit(k17j5);
-      'k1j5'    : Exit(k1j5);
-      'k1j56y7' : Exit(k1j56y7);
-      'k1j6'    : Exit(k1j6);
-      'k1j6y7'  : Exit(k1j6y7);
-      'k2'      : Exit(k2);
-      'k25'     : Exit(k25);
-      'k256'    : Exit(k256);
-      'k257x1'  : Exit(k257x1);
-      'k25x1'   : Exit(k25x1);
-      'k25x17'  : Exit(k25x17);
-      'k26'     : Exit(k26);
-      'k26x5'   : Exit(k26x5);
-      'k2j17'   : Exit(k2j17);
-      'k2j5'    : Exit(k2j5);
-      'k2j56'   : Exit(k2j56);
-      'k2j56y7' : Exit(k2j56y7);
-      'k2j5x1'  : Exit(k2j5x1);
-      'k2j5y6'  : Exit(k2j5y6);
-      'k2j6'    : Exit(k2j6);
-      'k2x1'    : Exit(k2x1);
-      'k34'     : Exit(k34);
-      'k345x2'  : Exit(k345x2);
-      'k34x2'   : Exit(k34x2);
-      'k5'      : Exit(k5);
-      'k56'     : Exit(k56);
-      'k56x4'   : Exit(k56x4);
-      'k6'      : Exit(k6);
-      'k6x5'    : Exit(k6x5);
-      'n0'      : Exit(n0);
-      'n167'    : Exit(n167);
-      'n167x4'  : Exit(n167x4);
-      'n25x6'   : Exit(n25x6);
-      'n26y5'   : Exit(n26y5);
-      'n345'    : Exit(n345);
-      'n345y7'  : Exit(n345y7);
-      'n345y2'  : Exit(n45y2);
-      'n5y2'    : Exit(n5y2);
-      'n67x2'   : Exit(n67x2);
-      'n6x2'    : Exit(n6x2);
+    Case LowerCase(sign) of
+      'j136y7'  : db := j136y7;
+      'j167y2'  : db := j167y2;
+      'j17'     : db := j17;
+      'j17y2'   : db := j17y2;
+      'j2'      : db := j2;
+      'j23'     : db := j23;
+      'j236'    : db := j236;
+      'j23k6'   : db := j23k6;
+      'j246y3'  : db := j246y3;
+      'j25'     : db := j25;
+      'j256'    : db := j256;
+      'j25y6'   : db := j25y6;
+      'j26'     : db := j26;
+      'j26y3'   : db := j26y3;
+      'j26y34'  : db := j26y34;
+      'j2k34'   : db := j2k34;
+      'j2k5'    : db := j2k5;
+      'j2k56'   : db := j2k56;
+      'j2k56x4' : db := j2k56x4;
+      'j2k6'    : db := j2k6;
+      'j2k6x5'  : db := j2k6x5;
+      'j2k6y3'  : db := j2k6y3;
+      'j2y3'    : db := j2y3;
+      'j3'      : db := j3;
+      'j346y5'  : db := j346y5;
+      'j34k6'   : db := j34k6;
+      'j36'     : db := j36;
+      'j3k5'    : db := j3k5;
+      'j3k56x4' : db := j3k56x4;
+      'j3k5x4'  : db := j3k5x4;
+      'j3k6'    : db := j3k6;
+      'j5'      : db := j5;
+      'j56'     : db := j56;
+      'j56y7'   : db := j56y7;
+      'j5y6'    : db := j5y6;
+      'j6'      : db := j6;
+      'k1'      : db := k1;
+      'k12'     : db := k12;
+      'k125'    : db := k125;
+      'k12j5'   : db := k12j5;
+      'k135x4'  : db := k135x4;
+      'k15'     : db := k15;
+      'k157x6'  : db := k157x6;
+      'k17j5'   : db := k17j5;
+      'k1j5'    : db := k1j5;
+      'k1j56y7' : db := k1j56y7;
+      'k1j6'    : db := k1j6;
+      'k1j6y7'  : db := k1j6y7;
+      'k2'      : db := k2;
+      'k25'     : db := k25;
+      'k256'    : db := k256;
+      'k257x1'  : db := k257x1;
+      'k25x1'   : db := k25x1;
+      'k25x17'  : db := k25x17;
+      'k26'     : db := k26;
+      'k26x5'   : db := k26x5;
+      'k2j17'   : db := k2j17;
+      'k2j5'    : db := k2j5;
+      'k2j56'   : db := k2j56;
+      'k2j56y7' : db := k2j56y7;
+      'k2j5x1'  : db := k2j5x1;
+      'k2j5y6'  : db := k2j5y6;
+      'k2j6'    : db := k2j6;
+      'k2x1'    : db := k2x1;
+      'k34'     : db := k34;
+      'k345x2'  : db := k345x2;
+      'k34x2'   : db := k34x2;
+      'k5'      : db := k5;
+      'k56'     : db := k56;
+      'k56x4'   : db := k56x4;
+      'k6'      : db := k6;
+      'k6x5'    : db := k6x5;
+      'n0'      : db := n0;
+      'n167'    : db := n167;
+      'n167x4'  : db := n167x4;
+      'n25x6'   : db := n25x6;
+      'n26y5'   : db := n26y5;
+      'n345'    : db := n345;
+      'n345y7'  : db := n345y7;
+      'n345y2'  : db := n45y2;
+      'n5y2'    : db := n5y2;
+      'n67x2'   : db := n67x2;
+      'n6x2'    : db := n6x2;
     else
-      Exit(Concat(qp, '?'));
+      db := Concat(sign, '?');
     end;
   end;
+  Result := db;
 end;
 
 
-function Bj(const qp : String) : String;
+function Bj(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 51, 10);
   Tail := Copy(qp,  1, 50);
@@ -166,7 +173,7 @@ begin
 end;
 
 
-function Fn(const qp : String) : String;
+function Fn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 26, 35);
   Tail := Copy(qp,  1, 25);
@@ -174,13 +181,13 @@ begin
 end;
 
 
-function Cn(const qp : String) : String;
+function Cn(const qp: TSumarian) : TSumarian;
 begin
   Result := Copy(qp, 1, 60);
 end;
 
 
-function Gn(const qp : String) : String;
+function Gn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 36, 25);
   Tail := Copy(qp,  1, 35);
@@ -188,7 +195,7 @@ begin
 end;
 
 
-function Dn(const qp : String) : String;
+function Dn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 11, 50);
   Tail := Copy(qp,  1, 10);
@@ -196,7 +203,7 @@ begin
 end;
 
 
-function An(const qp : String) : String;
+function An(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 46, 15);
   Tail := Copy(qp,  1, 45);
@@ -204,7 +211,7 @@ begin
 end;
 
 
-function En(const qp : String) : String;
+function En(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 21, 40);
   Tail := Copy(qp,  1, 20);
@@ -212,7 +219,7 @@ begin
 end;
 
 
-function Bn(const qp : String) : String;
+function Bn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 56,  5);
   Tail := Copy(qp,  1, 55);
@@ -220,7 +227,7 @@ begin
 end;
 
 
-function Fk(const qp : String) : String;
+function Fk(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 31, 30);
   Tail := Copy(qp,  1, 30);
@@ -228,18 +235,25 @@ begin
 end;
 
 
-procedure CGDAE(const Prop, qp : String);
+function Sentinel(const qp: TSumarian) : Boolean;
 begin
-  Tb := chr(9);
-  Diadem := Concat(Prop, '-cgdae-m');
+  if (Length(qp) <> 60) then
+    Sentinel := True
+  else
+    Sentinel := False;
+end;
 
-  if (length(qp) <> 60) then
+
+procedure CGDAE(const sign: TDzongkha; const qp: TSumarian);
+begin
+  if Sentinel(qp) then
     begin
       WriteLn;
       WriteLn(Tb, qp);
       Exit;
     end;
 
+  Diadem := Concat(sign, '-cgdae-m');
   WriteLn;
   WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
   WriteLn(Tb, En(qp));
@@ -250,18 +264,16 @@ begin
 end;
 
 
-procedure EADGBE(const Prop, qp : String);
+procedure EADGBE(const sign: TDzongkha; const qp: TSumarian);
 begin
-  Tb := chr(9);
-  Diadem := Concat(Prop, '-eadgbe-m');
-
-  if (length(qp) <> 60) then
+  if Sentinel(qp) then
     begin
       WriteLn;
       WriteLn(Tb, qp);
       Exit;
     end;
 
+  Diadem := Concat(sign, '-eadgbe-m');
   WriteLn;
   WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
   WriteLn(Tb, En(qp));
@@ -273,18 +285,16 @@ begin
 end;
 
 
-procedure Ennead(const Prop, qp : String);
+procedure Ennead(const sign: TDzongkha; const qp: TSumarian);
 begin
-  Tb := chr(9);
-  Diadem := Concat(Prop, '-ennead-m');
-
-  if (length(qp) <> 60) then
+  if Sentinel(qp) then
     begin
       WriteLn;
       WriteLn(Tb, qp);
       Exit;
     end;
 
+  Diadem := Concat(sign, '-ennead-m');
   WriteLn;
   WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
   WriteLn(Tb, Bj(qp));
@@ -305,8 +315,6 @@ var
   fmt : String[24] = '';
 
 begin
-  Tb := Chr(9);
-
   while itr < 7 do
   begin
     fmt += Concat(Tb, '%s');
@@ -332,6 +340,7 @@ end;
 
 initialization
 
+  Tb := chr(9);
   Epoch := fpTime;
 
 with DataBank do
