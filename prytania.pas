@@ -1,8 +1,8 @@
-{$mode objfpc}{$R+}
+{$MODE FPC}{$R+}
 program Prytania;
 
 uses
-  Coliseum in 'coliseum.pas';
+  Coliseum;
 
 var
   item : Byte;

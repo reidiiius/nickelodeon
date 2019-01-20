@@ -1,18 +1,17 @@
-{$mode objfpc}{$R+}
+{$MODE FPC}{$R+}
 unit Coliseum;
 
 interface
 
 uses
-  BaseUnix, SysUtils;
+  DateUtils, SysUtils;
 
 type
   TDzongkha = String[20];
   TSumarian = String[60];
 
 var
-  Tb : Char;
-  Epoch : TTime;
+  Epoch : Int64;
   Diadem, Head, Tail : TSumarian;
 
   DataBank : Record
@@ -33,23 +32,25 @@ var
 
 function Retrieve(const sign: TDzongkha) : TSumarian;
 
-function Bj(const qp: TSumarian) : TSumarian;
+function S_Bj(const qp: TSumarian) : TSumarian;
 
-function Fn(const qp: TSumarian) : TSumarian;
+function S_Fn(const qp: TSumarian) : TSumarian;
 
-function Cn(const qp: TSumarian) : TSumarian;
+function S_Cn(const qp: TSumarian) : TSumarian;
 
-function Gn(const qp: TSumarian) : TSumarian;
+function S_Gn(const qp: TSumarian) : TSumarian;
 
-function Dn(const qp: TSumarian) : TSumarian;
+function S_Dn(const qp: TSumarian) : TSumarian;
 
-function An(const qp: TSumarian) : TSumarian;
+function S_An(const qp: TSumarian) : TSumarian;
 
-function En(const qp: TSumarian) : TSumarian;
+function S_En(const qp: TSumarian) : TSumarian;
 
-function Bn(const qp: TSumarian) : TSumarian;
+function S_Bn(const qp: TSumarian) : TSumarian;
 
-function Fk(const qp: TSumarian) : TSumarian;
+function S_Fk(const qp: TSumarian) : TSumarian;
+
+function Announce(const qp: TSumarian) : ShortString;
 
 function Sentinel(const qp: TSumarian) : Boolean;
 
@@ -68,7 +69,7 @@ implementation
 
 function Retrieve(const sign: TDzongkha) : TSumarian;
 var
-  db : TSumarian = '';
+  db : TSumarian = #0;
 
 begin
   with DataBank do
@@ -158,80 +159,90 @@ begin
       'n67x2'   : db := n67x2;
       'n6x2'    : db := n6x2;
     else
-      db := Concat(sign, '?');
+      db := sign;
     end;
   end;
-  Result := db;
+  Retrieve := db;
 end;
 
 
-function Bj(const qp: TSumarian) : TSumarian;
+function S_Bj(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 51, 10);
   Tail := Copy(qp,  1, 50);
-  Result := Concat(Head, Tail);
+  S_Bj := Concat(Head, Tail);
 end;
 
 
-function Fn(const qp: TSumarian) : TSumarian;
+function S_Fn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 26, 35);
   Tail := Copy(qp,  1, 25);
-  Result := Concat(Head, Tail);
+  S_Fn := Concat(Head, Tail);
 end;
 
 
-function Cn(const qp: TSumarian) : TSumarian;
+function S_Cn(const qp: TSumarian) : TSumarian;
 begin
-  Result := Copy(qp, 1, 60);
+  S_Cn := Copy(qp, 1, 60);
 end;
 
 
-function Gn(const qp: TSumarian) : TSumarian;
+function S_Gn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 36, 25);
   Tail := Copy(qp,  1, 35);
-  Result := Concat(Head, Tail);
+  S_Gn := Concat(Head, Tail);
 end;
 
 
-function Dn(const qp: TSumarian) : TSumarian;
+function S_Dn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 11, 50);
   Tail := Copy(qp,  1, 10);
-  Result := Concat(Head, Tail);
+  S_Dn := Concat(Head, Tail);
 end;
 
 
-function An(const qp: TSumarian) : TSumarian;
+function S_An(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 46, 15);
   Tail := Copy(qp,  1, 45);
-  Result := Concat(Head, Tail);
+  S_An := Concat(Head, Tail);
 end;
 
 
-function En(const qp: TSumarian) : TSumarian;
+function S_En(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 21, 40);
   Tail := Copy(qp,  1, 20);
-  Result := Concat(Head, Tail);
+  S_En := Concat(Head, Tail);
 end;
 
 
-function Bn(const qp: TSumarian) : TSumarian;
+function S_Bn(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 56,  5);
   Tail := Copy(qp,  1, 55);
-  Result := Concat(Head, Tail);
+  S_Bn := Concat(Head, Tail);
 end;
 
 
-function Fk(const qp: TSumarian) : TSumarian;
+function S_Fk(const qp: TSumarian) : TSumarian;
 begin
   Head := Copy(qp, 31, 30);
   Tail := Copy(qp,  1, 30);
-  Result := Concat(Head, Tail);
+  S_Fk := Concat(Head, Tail);
+end;
+
+
+function Announce(const qp: TSumarian) : ShortString;
+var
+  temporal : ShortString;
+
+begin
+  temporal := Format('%s%s%s', [#10#9, qp, '?']);
+  Announce := temporal;
 end;
 
 
@@ -248,19 +259,18 @@ procedure CGDAE(const sign: TDzongkha; const qp: TSumarian);
 begin
   if Sentinel(qp) then
     begin
-      WriteLn;
-      WriteLn(Tb, qp);
+      WriteLn(Announce(qp));
       Exit;
     end;
 
   Diadem := Concat(sign, '-cgdae-m');
   WriteLn;
-  WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
-  WriteLn(Tb, En(qp));
-  WriteLn(Tb, An(qp));
-  WriteLn(Tb, Dn(qp));
-  WriteLn(Tb, Gn(qp));
-  WriteLn(Tb, Cn(qp));
+  WriteLn(#9, UpCase(Diadem), Epoch, #32);
+  WriteLn(#9, S_En(qp));
+  WriteLn(#9, S_An(qp));
+  WriteLn(#9, S_Dn(qp));
+  WriteLn(#9, S_Gn(qp));
+  WriteLn(#9, S_Cn(qp));
 end;
 
 
@@ -268,20 +278,19 @@ procedure EADGBE(const sign: TDzongkha; const qp: TSumarian);
 begin
   if Sentinel(qp) then
     begin
-      WriteLn;
-      WriteLn(Tb, qp);
+      WriteLn(Announce(qp));
       Exit;
     end;
 
   Diadem := Concat(sign, '-eadgbe-m');
   WriteLn;
-  WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
-  WriteLn(Tb, En(qp));
-  WriteLn(Tb, Bn(qp));
-  WriteLn(Tb, Gn(qp));
-  WriteLn(Tb, Dn(qp));
-  WriteLn(Tb, An(qp));
-  WriteLn(Tb, En(qp));
+  WriteLn(#9, UpCase(Diadem), Epoch, #32);
+  WriteLn(#9, S_En(qp));
+  WriteLn(#9, S_Bn(qp));
+  WriteLn(#9, S_Gn(qp));
+  WriteLn(#9, S_Dn(qp));
+  WriteLn(#9, S_An(qp));
+  WriteLn(#9, S_En(qp));
 end;
 
 
@@ -289,35 +298,34 @@ procedure Ennead(const sign: TDzongkha; const qp: TSumarian);
 begin
   if Sentinel(qp) then
     begin
-      WriteLn;
-      WriteLn(Tb, qp);
+      WriteLn(Announce(qp));
       Exit;
     end;
 
   Diadem := Concat(sign, '-ennead-m');
   WriteLn;
-  WriteLn(Tb, UpCase(Diadem), Epoch, ' ');
-  WriteLn(Tb, Bj(qp));
-  WriteLn(Tb, Fn(qp));
-  WriteLn(Tb, Cn(qp));
-  WriteLn(Tb, Gn(qp));
-  WriteLn(Tb, Dn(qp));
-  WriteLn(Tb, An(qp));
-  WriteLn(Tb, En(qp));
-  WriteLn(Tb, Bn(qp));
-  WriteLn(Tb, Fk(qp));
+  WriteLn(#9, UpCase(Diadem), Epoch, #32);
+  WriteLn(#9, S_Bj(qp));
+  WriteLn(#9, S_Fn(qp));
+  WriteLn(#9, S_Cn(qp));
+  WriteLn(#9, S_Gn(qp));
+  WriteLn(#9, S_Dn(qp));
+  WriteLn(#9, S_An(qp));
+  WriteLn(#9, S_En(qp));
+  WriteLn(#9, S_Bn(qp));
+  WriteLn(#9, S_Fk(qp));
 end;
 
 
 procedure Menu;
 var
   itr : Byte = 0;
-  fmt : String[24] = '';
+  fmt : String[24] = #0;
 
 begin
   while itr < 7 do
   begin
-    fmt += Concat(Tb, '%s');
+    fmt += Concat(#9, '%s');
     Inc(itr);
   end;
 
@@ -340,8 +348,8 @@ end;
 
 initialization
 
-  Tb := chr(9);
-  Epoch := fpTime;
+
+  Epoch := DateTimeToUnix(now);
 
 with DataBank do
 begin
